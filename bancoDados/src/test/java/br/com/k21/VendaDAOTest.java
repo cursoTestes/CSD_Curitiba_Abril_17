@@ -32,5 +32,42 @@ public class VendaDAOTest extends BaseDBTest {
 		
 	}
 	
+	@Test
+	public void testTotal_Para_Vendedor_com_1_venda() {
+		// Arrange
+		Vendedor vendedor = new Vendedor();
+		int entradaIdVendedor = 2;
+		vendedor.setId(entradaIdVendedor);
+		int entradaAno = 2011;
+		double resultado;
+		double esperado = 100.0;
+		
+		// act
+		VendaDAO.setEntityManager(emf.createEntityManager());
+		resultado = VendaDAO.buscarTotalDeVendasPorVendedorEAno(vendedor, entradaAno);
+		
+		// asserts
+		assertEquals(esperado, resultado);
+		
+	}
+	
+	@Test
+	public void testTotal_Para_Vendedor_com_2_vendas_no_ano() {
+		// Arrange
+		Vendedor vendedor = new Vendedor();
+		int entradaIdVendedor = 3;
+		vendedor.setId(entradaIdVendedor);
+		int entradaAno = 2011;
+		double resultado;
+		double esperado = 2010.0;
+		
+		// act
+		VendaDAO.setEntityManager(emf.createEntityManager());
+		resultado = VendaDAO.buscarTotalDeVendasPorVendedorEAno(vendedor, entradaAno);
+		
+		// asserts
+		assertEquals(esperado, resultado);
+		
+	}
 
 }
